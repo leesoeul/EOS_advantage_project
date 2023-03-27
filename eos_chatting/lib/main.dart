@@ -10,11 +10,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Chatting App',
+      title: 'first App',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.lightGreen,
+        fontFamily: 'Teko'
       ),
-      home: LoginSignUpScreen()
-    );
+      home: LoginSignUpScreen());
   }
 }

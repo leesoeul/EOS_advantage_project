@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import '../config/palette.dart';
+import 'package:flutter/animation.dart';
 
 class LoginSignUpScreen extends StatefulWidget {
   const LoginSignUpScreen({Key? key}) : super(key: key);
@@ -10,138 +11,237 @@ class LoginSignUpScreen extends StatefulWidget {
 }
 
 class _LoginSignUpScreenState extends State<LoginSignUpScreen>{
-// TODO : isSignupScreen 변수 선언
+  bool isSignupScreen = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold (
-// TODO : background color로 palette의 backgroundColor 설정
-    backgroundColor: Palette.backgroundColor,
-    body: Stack(
-      children: [
-        Positioned(
-// TODO : top, left, right 모두 0으로 설정
-    top:0, left: 0, right: 0,
-    child: Container(
-// TODO : height 300으로 설정
-        height: 300,
-    decoration: BoxDecoration(
-    image: DecorationImage(
-// TODO : background.png 넣기
-        image: AssetImage('assets/background.png'),
-        fit: BoxFit.fill
-    ),
-    ),
-
-
-      child: Container(
-        padding: EdgeInsets.only(top:90, left:20) ,
-          child: Column(
-// TODO : 왼쪽 정렬,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-          RichText(
-          text: TextSpan(
-// TODO : letter spacing 1.0, font size 25, color white
-            text:'welcome ',
-            style: TextStyle(letterSpacing:  1.0, fontSize: 25, color: Colors.white),
+        backgroundColor: Palette.backgroundColor,
+        body: Stack(
           children: [
-              TextSpan(
-// TODO : letter spacing 1.0, font size 25, color white, bold
-                text:'to EOS chat',
-                style: TextStyle(letterSpacing:  1.0, fontSize: 25, color: Colors.white, fontWeight: FontWeight.bold  ),
+            Positioned(
+                top:0, left: 0, right: 0,
+                child: Container(
+                  height: 300,
+                  decoration: BoxDecoration(
 
-              )
-            ]
-          )
-    ),
-
-
-      SizedBox(
-// TODO : height 5.0으로 글 사이 간격 주기
-      height: 5.0,
-      ),
-      Text('signup to continue',
-          style: TextStyle(letterSpacing: 1.0, color: Colors.white,),
-// TODO : spacing 1.0, color white
-          )],),),)),
+                    image: DecorationImage(
+                        image: AssetImage('assets/images/background.png'),
+                        fit: BoxFit.fill),
+                  ),
 
 
+                  child: Container(
+                    padding: EdgeInsets.only(top:90, left:20) ,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        RichText(
+                            text: TextSpan(
+                                text:'Welcome ',
+                                style: TextStyle(
+                                    letterSpacing:  1.0, fontSize: 25, color: Colors.white),
+                                children: [
+                                  TextSpan(
+                                    text: (!isSignupScreen) ? 'back!': 'to EOS chat!',
+                                    style: TextStyle(letterSpacing:  1.0, fontSize: 25, color: Colors.white, fontWeight: FontWeight.bold  ),
+                                  )
+                                ])),
 
-      Positioned(
-        top: 150,
-// TODO : top 150
-        child: Container(
-          height: 280.0,
-          padding: EdgeInsets.all(20),
-          width: MediaQuery.of(context).size.width -40,
-          margin: EdgeInsets.only(left: 20, right: 20),
-// TODO : height 280.0, padding 모두 20, width 핸드폰 가로 길이 – 40
-// TODO : margin 가로로 양쪽 20
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.all(Radius.circular(15)),
-            
-// TODO : color white, border radius 15
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.3),
-                  blurRadius: 15, spreadRadius: 5,
-// TODO : color black, 투명도 0.3, blur radius 15, spread radius 5
-                )
-              ]
-          ),
+
+                        SizedBox(
+                          height: 5.0,
+                        ),
+                        Text((!isSignupScreen) ? 'signin to continue': 'signup to continue',
+                            style: TextStyle(letterSpacing: 1.0, color: Colors.white,))
+                      ],
+                    ),
+                  ),
+                )),
 
 
 
-          child: Column(
-              children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-// TODO : mainAxisAlignment.spaceAround
-          children: [
-          GestureDetector(
-          child: Column(
-              children: [
-              Text('LOGIN', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-// TODO : font size 16, bold
-// TODO : isSignupScreen이 false면 palette의 activeColor, true면 palette의 textColor1
-              ),
-// TODO : isSigunupScreen이 false일 때만 밑줄이 생기도록
-          Container(
-            margin: EdgeInsets.only(top: 3),
-            height: 2, width: 55, color: Colors.green,
-// TODO : margin top만 3, height 2, width 55, color green
-                    )],),),
+            Positioned(
+                top: 150,
+                child: AnimatedContainer(
+                  height: (!isSignupScreen) ? 250.0 : 280.0,
+                  padding: EdgeInsets.all(20),
+                  width: MediaQuery.of(context).size.width -40,
+                  margin: EdgeInsets.symmetric(horizontal: 20.0),
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(15.0),
+                      boxShadow: [
+                        BoxShadow(
+                            color: Colors.black.withOpacity(0.3),
+                            blurRadius: 15, spreadRadius: 5)
+                      ]),
+                  duration: Duration(milliseconds: 500),
+                  curve: Curves.easeIn,
 
 
-      GestureDetector(
-          child: Column(
-            children: [
-              Text('LOGIN', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-// TODO : font size 16, bold
-// TODO : isSignupScreen이 true면 palette의 activeColor, false면 palette의 textColor1
-              ),
-// TODO : isSigunupScreen이 true일 때만 밑줄이 생기도록
-              Container(
-                margin: EdgeInsets.only(top: 3),
-                height: 2, width: 55, color: Colors.green,
 
-// TODO : margin top만 3, height 2, width 55, color green
-              )],))],),
-
-
-                Container(
-                    child: Form(
-                      child: Column(
+                  child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            TextFormField(
-                              decoration: InputDecoration(
-// TODO : prefix icon 원하는 icon 입력, color는 palette의 iconColor
-                                enabledBorder: OutlineInputBorder(
-// TODO : borderside 색은 palette의 textColot1
-// TODO : border radius는 모두 35
+                            GestureDetector(
+                              onTap:(){
+                                setState((){
+                                  isSignupScreen = false;
+                                });
+                              },
+                              child: Column(
+                                children: [
+                                  Text(
+                                    'LOGIN',
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
+                                        color: !isSignupScreen
+                                            ? Palette.activeColor
+                                            : Palette.textColor1),
+                                  ),
+                                  if (!isSignupScreen)
+                                    Container(
+                                      margin: EdgeInsets.only(top: 3),
+                                      height: 2, width: 55, color: Colors.green,
+                                    )
+                                ],
+                              ),
+                            ),
+
+
+                            GestureDetector(
+                                onTap:(){
+                                  setState((){
+                                    isSignupScreen = true;
+                                  });
+                                },
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      'SIGNUP',
+                                      style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                          color: isSignupScreen
+                                              ? Palette.activeColor
+                                              : Palette.textColor1),
+                                    ),
+                                    if (isSignupScreen)
+                                      Container(
+                                        margin: EdgeInsets.only(top: 3),
+                                        height: 2, width: 55, color: Colors.green,
+                                      )
+                                  ],
+                                ))
+                          ],
+                        ),
+
+
+
+
+
+                        Container(
+                            margin: EdgeInsets.only(top: 20),
+                            child: Form(
+                              child: Column(
+                                  children: [
+                                    for(num i=0;i<((!isSignupScreen)?2:3);i++)
+                                    TextFormField(
+
+                                      decoration: InputDecoration(
+                                        prefixIcon: Icon(Icons.account_circle,
+                                            color: Palette.iconColor),
+                                        hintText : 'User name',
+                                        enabledBorder: OutlineInputBorder(
+                                            borderSide:
+                                            BorderSide(color: Palette.textColor1),
+                                            borderRadius:
+                                            BorderRadius.all(Radius.circular(35.0))),
+                                        focusedBorder: OutlineInputBorder(
+                                            borderSide:
+                                            BorderSide(color: Palette.textColor1) ,
+                                            borderRadius:
+                                            BorderRadius.all(Radius.circular(35.0))),
+                                      ),
+                                    ),
+                                    // SizedBox(height: 8),
+
+
+                                  ]),
+                            ))
+                      ]),)),
+
+            Positioned(
+                top: 410,
+                right: 0,
+                left:0,
+                child: Center(
+                    child: Container(
+                        padding: EdgeInsets.all(15),
+                        height: 90,
+                        width: 90,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(50)),
+                        child: Container(
+                            decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                    colors: [Colors.lightGreen, Colors.green],
+                                    begin: Alignment.topLeft,
+                                    end: Alignment.bottomRight
                                 ),
-                                focusedBorder: OutlineInputBorder(
-// TODO : borderside 색은 palette의 textColot1
-// TODO : border radius는 모두 35
-                                ),),)]),))]),))],));}}
+                                borderRadius: BorderRadius.circular(30 ),
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.black.withOpacity(0.3 ),
+                                      spreadRadius: 1,
+                                      blurRadius: 1,
+                                      offset: Offset(0,1)
+                                  )
+                                ]
+                            ),
+                            child: Icon(
+                              Icons.airport_shuttle,
+                              color:Colors.white,
+                            )
+                        )
+                    )
+                )
+            ),
+
+
+            Positioned(
+                top : MediaQuery.of(context).size.height -125,
+                right:0,
+                left:0,
+                child: Column(
+                  children: [
+                    (!isSignupScreen) ? Text('or Signin with') : Text('or Signup with'),
+                    // TODO : LOGIN 누르면 ‘or Signin with’, SIGNUP 누르면 ‘or Signup with’
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    TextButton.icon(
+                      onPressed: (){},
+                      style: TextButton.styleFrom(
+                        primary: Colors.white,
+                        minimumSize: Size(155,40),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)
+                        ),
+                          backgroundColor: Palette.googleColor,
+                      ),
+                      icon: Icon(Icons.add),
+                      label: Text('Google'),
+                    )
+                  ],
+                )
+            )
+
+
+
+          ],));} }
