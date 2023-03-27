@@ -149,13 +149,51 @@ class _LoginSignUpScreenState extends State<LoginSignUpScreen>{
                             child: Form(
                               child: Column(
                                   children: [
-                                    for(num i=0;i<((!isSignupScreen)?2:3);i++)
+                                    if(isSignupScreen)
                                     TextFormField(
-
                                       decoration: InputDecoration(
                                         prefixIcon: Icon(Icons.account_circle,
                                             color: Palette.iconColor),
                                         hintText : 'User name',
+                                        enabledBorder: OutlineInputBorder(
+                                            borderSide:
+                                            BorderSide(color: Palette.textColor1),
+                                            borderRadius:
+                                            BorderRadius.all(Radius.circular(35.0))),
+                                        focusedBorder: OutlineInputBorder(
+                                            borderSide:
+                                            BorderSide(color: Palette.textColor1) ,
+                                            borderRadius:
+                                            BorderRadius.all(Radius.circular(35.0))),
+                                      ),
+                                    ),
+
+                                    SizedBox(height: 8),
+
+                                    TextFormField(
+                                      decoration: InputDecoration(
+                                        prefixIcon: Icon(Icons.email,
+                                            color: Palette.iconColor),
+                                        hintText : 'email',
+                                        enabledBorder: OutlineInputBorder(
+                                            borderSide:
+                                            BorderSide(color: Palette.textColor1),
+                                            borderRadius:
+                                            BorderRadius.all(Radius.circular(35.0))),
+                                        focusedBorder: OutlineInputBorder(
+                                            borderSide:
+                                            BorderSide(color: Palette.textColor1) ,
+                                            borderRadius:
+                                            BorderRadius.all(Radius.circular(35.0))),
+                                      ),
+                                    ),
+                                    SizedBox(height: 8),
+
+                                    TextFormField(
+                                      decoration: InputDecoration(
+                                        prefixIcon: Icon(Icons.password,
+                                            color: Palette.iconColor),
+                                        hintText : 'password',
                                         enabledBorder: OutlineInputBorder(
                                             borderSide:
                                             BorderSide(color: Palette.textColor1),
